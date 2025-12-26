@@ -12,7 +12,10 @@ Claude Data Analysis Assistant is an intelligent data analysis platform that lev
 The easiest way to analyze your data:
 
 ```bash
-# 1. Place data files in data_storage/
+# 1. Create data_storage/ directory and place data files:
+mkdir -p data_storage
+cp your_data.csv ./data_storage/
+
 # 2. Run this single command:
 /do-more
 
@@ -25,7 +28,7 @@ The easiest way to analyze your data:
 ```
 
 ### Traditional Usage
-1. Place your data files in the `data_storage/` directory
+1. Create the `data_storage/` directory and place your data files
 2. Use specialized skills directly (e.g., `/rfm-customer-segmentation`) or universal commands
 3. Use `/analyze [filename]` for general data analysis
 4. Use `/visualize [filename]` to create visualizations
@@ -154,11 +157,7 @@ claude-data-analysis/
 │       ├── attribution-analysis-modeling/
 │       ├── regression-analysis-modeling/
 │       └── ... (4 more skills)
-├── data_storage/       # Data files directory (Olist e-commerce datasets)
-│   ├── Orders.csv
-│   ├── Customers.csv
-│   ├── Order Items.csv
-│   └── ... (9 datasets total)
+├── data_storage/       # Data files directory (create this directory and add your data)
 ├── do_more_analysis/   # ⭐ NEW: /do-more command output directory
 │   ├── skill_execution/  # Individual skill results with visualizations
 │   │   ├── data-exploration-visualization/
@@ -278,17 +277,14 @@ python .claude/hooks/validate-analysis.py < file_path
 
 ### ⭐ Recommended: Automatic Multi-Skill Analysis
 ```bash
-# E-commerce complete analysis (one command!)
+# Place your data in data_storage/ and run:
 /do-more
 
 # Output (2-5 minutes):
-# ✓ Data Exploration & Visualization (5 charts)
-# ✓ RFM Customer Segmentation (5 segments + VIP list)
-# ✓ LTV Prediction (ML models with predictions)
-# ✓ Retention Analysis (cohort heatmaps + retention curves)
-# ✓ Funnel Analysis (conversion metrics + dashboard)
-# ✓ Growth Model Analysis (CAGR + trend analysis)
-# ✓ Content Analysis (sentiment + keyword extraction)
+# ✓ Data Exploration & Visualization
+# ✓ Customer Segmentation (if e-commerce data)
+# ✓ Predictive Analysis (if applicable)
+# ✓ Retention Analysis (if time-series data)
 # ✓ Interactive HTML report with all findings
 ```
 
@@ -646,23 +642,23 @@ complete_analysis/
 
 ### E-commerce Transaction Data
 ```bash
-/rfm-customer-segmentation olist_order_items_dataset.csv
-/user-profiling-analysis [customer_behavior_data.csv]
-/ltv-predictor [customer_ltv_data.csv]
+/rfm-customer-segmentation orders.csv
+/user-profiling-analysis customer_behavior.csv
+/ltv-predictor customer_transactions.csv
 ```
 
 ### Marketing Campaign Data
 ```bash
-/attribution-analysis-modeling [marketing_touchpoints.csv]
-/growth-model-analyzer [user_acquisition_data.csv]
-/funnel-analysis [conversion_funnel_data.csv]
+/attribution-analysis-modeling marketing_touchpoints.csv
+/growth-model-analyzer user_acquisition_data.csv
+/funnel-analysis conversion_funnel_data.csv
 ```
 
 ### General Dataset Analysis
 ```bash
 /do-all  # Complete automated workflow
-/data-exploration-visualization [dataset.csv]  # EDA focused
-/regression-analysis-modeling [dataset.csv]  # Predictive modeling
+/data-exploration-visualization dataset.csv  # EDA focused
+/regression-analysis-modeling dataset.csv  # Predictive modeling
 ```
 
 ## Development Notes

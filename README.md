@@ -2,15 +2,12 @@
 
 A modern, intelligent data analysis platform built with Claude Code's sub-agents, slash-commands, skills, and hooks. Transform your data analysis workflow with AI-powered assistance and specialized analysis tools.
 
-简单的一句话： 2个命令， /do-all 常规数据分析 ； /do-more 互联网数据分析 。 而分析数据是放在 /data_storage 。就这么简单，用起来吧！
-
-注意： 下载项目下来，分析数据是放在 /data_storage [删去原来的demo数据] ，你需要先删除 complete_analysis 和 do_more_analysis 这两个文件夹。我这里放着是给你参考最终的分析结果，作为例子。
-
 ## 🚀 Quick Start
 
 ### 1. Set Up Your Data
-Place your dataset in the `data_storage/` directory:
+Create the `data_storage/` directory and place your dataset:
 ```bash
+mkdir -p data_storage
 cp your_data.csv ./data_storage/
 ```
 
@@ -18,25 +15,23 @@ cp your_data.csv ./data_storage/
 Use intuitive slash commands to analyze your data:
 
 ```bash
+# ⭐ RECOMMENDED: Automatic multi-skill analysis
+/do-more
+
 # Complete interactive workflow with human feedback checkpoints
 /do-all
 
-# ⭐ NEW: Automatic multi-skill analysis
-/do-more
-
 # Basic exploratory analysis
-/analyze user_behavior_sample.csv exploratory
+/analyze your_data.csv exploratory
 
 # Create visualizations
-/visualize user_behavior_sample.csv all
+/visualize your_data.csv all
 
 # Generate analysis code
 /generate python data-cleaning
 
 # Create comprehensive report
-/report user_behavior_sample.csv complete markdown
-
-
+/report your_data.csv complete markdown
 ```
 
 ## 🎯 Key Features
@@ -170,6 +165,7 @@ complete_analysis/
 ### ⭐ Automatic Multi-Skill Analysis
 ```bash
 # Easiest way - no parameters needed!
+# First, place your data files in data_storage/
 /do-more
 
 # Output (2-5 minutes):
@@ -196,8 +192,8 @@ complete_analysis/
 # Quick automated analysis
 /do-more
 
-# Or specific customer analysis
-/rfm-customer-segmentation olist_orders.csv
+# Or specific customer analysis skills
+/rfm-customer-segmentation orders.csv
 /ltv-predictor order_items.csv
 /retention-analysis orders.csv customers.csv
 ```
@@ -237,7 +233,8 @@ claude-data-analysis/
 ├── .claude/
 │   ├── agents/          # Sub-agent configurations
 │   ├── commands/        # Slash command definitions
-│   │   ├── do-more.md   # ⭐ NEW! Automatic multi-skill analysis
+│   │   ├── do-more.md   # ⭐ Automatic multi-skill analysis
+│   │   └── do-all.md    # Complete interactive workflow
 │   ├── hooks/          # Automation scripts
 │   ├── settings.json   # Claude Code settings
 │   └── skills/         # ⭐ 12 Specialized analysis skills
@@ -247,79 +244,33 @@ claude-data-analysis/
 │       ├── funnel-analysis/
 │       ├── growth-model-analyzer/
 │       ├── content-analysis/
-│       └── ... (9 more skills)
-├── data_storage/       # Your data files
-│   ├── Orders.csv
-│   ├── Customers.csv
-│   └── ... (Olist datasets included)
-├── do_more_analysis/   # ⭐ NEW! /do-more output directory
-│   ├── skill_execution/  # Individual skill results
-│   │   ├── data-exploration-visualization/
-│   │   ├── rfm-customer-segmentation/
-│   │   ├── ltv-predictor/
-│   │   ├── retention-analysis/
-│   │   ├── funnel-analysis/
-│   │   ├── growth-model-analyzer/
-│   │   └── content-analysis/
-│   └── integrated_results/
-│       └── Comprehensive_Analysis_Report.html  # ⭐ Interactive report
-├── analysis_reports/   # Generated analysis reports
-├── visualizations/     # Generated charts
-├── generated_code/     # Analysis code
-└── examples/          # Example datasets
+│       ├── attribution-analysis-modeling/
+│       ├── ab-testing-analyzer/
+│       ├── regression-analysis-modeling/
+│       ├── recommender-system/
+│       ├── data-exploration-visualization/
+│       └── user-profiling-analysis/
+├── data_storage/       # Place your data files here (create this directory)
+├── do_more_analysis/   # /do-more output directory (auto-created)
+├── complete_analysis/  # /do-all output directory (auto-created)
+└── README.md
 ```
-
-## 🎨 Sample Data
-
-The project includes Olist Brazilian E-commerce datasets in `data_storage/`:
-
-- **Orders.csv** (99,441 records): Order information, status, timestamps
-- **Customers.csv** (99,441 records): Customer demographics, location
-- **Order Items.csv**: Order details, products, pricing
-- **Order Payments.csv**: Payment methods, installments
-- **Products.csv**: Product catalog, categories
-- **Reviews.csv** (99,224 records): Customer reviews, ratings, comments
-- **Categories.csv**: Product categories
-- **Sellers.csv**: Seller information
-- **Geolocation.csv**: Geographic data
-
-**Sample Workflow:**
-```bash
-# 1. Data already in data_storage/
-# 2. Run automatic analysis
-/do-more
-
-# 3. View results
-# Open: do_more_analysis/integrated_results/Comprehensive_Analysis_Report.html
-```
-
-## 🔧 Configuration
-
-### Environment Setup
-The project uses Claude Code's configuration system. Key settings:
-
-1. **Hooks**: Automated validation and context loading
-2. **Sub-agents**: Specialized AI assistants for different tasks
-3. **Commands**: Custom slash commands for common operations
-
-### Requirements
-- Python 3.8+ for data analysis
-- Claude Code with sub-agents enabled
-- Data files in CSV, JSON, or Excel format
 
 ## 📚 Getting Started Guide
 
 ### For New Users
-1. **Place your data** in `data_storage/`
-2. **Run exploratory analysis**: `/analyze your_data.csv exploratory`
-3. **Create visualizations**: `/visualize your_data.csv all`
-4. **Generate report**: `/report your_data.csv complete markdown`
+1. **Create data directory**: `mkdir -p data_storage`
+2. **Place your data** in `data_storage/`
+3. **Run exploratory analysis**: `/analyze your_data.csv exploratory`
+4. **Create visualizations**: `/visualize your_data.csv all`
+5. **Generate report**: `/report your_data.csv complete markdown`
 
 ### For Advanced Users
 1. **Customize agents**: Modify `.claude/agents/` configurations
 2. **Create custom commands**: Add new commands in `.claude/commands/`
 3. **Set up automation**: Configure hooks in `.claude/settings.json`
 4. **Extend functionality**: Add custom analysis scripts
+5. **Use specialized skills**: Leverage domain-specific analysis modules
 
 ## 🎯 Analysis Types
 
@@ -376,18 +327,28 @@ The project uses Claude Code's configuration system. Key settings:
 - Visualization code
 - Custom analysis
 
+## 🔧 Configuration
+
+### Environment Setup
+The project uses Claude Code's configuration system. Key settings:
+
+1. **Hooks**: Automated validation and context loading
+2. **Sub-agents**: Specialized AI assistants for different tasks
+3. **Commands**: Custom slash commands for common operations
+4. **Skills**: Domain-specific analysis modules
+
+### Requirements
+- Python 3.8+ for data analysis
+- Claude Code with sub-agents enabled
+- Data files in CSV, JSON, or Excel format
+
 ## 📋 Project Status
 
 **Current Phase**: Active Development with 12 Specialized Skills ✅
 
 ### Completed Features
 - [x] Project structure and configuration
-- [x] Data Explorer sub-agent
-- [x] Visualization Specialist sub-agent
-- [x] Code Generator sub-agent
-- [x] Report Writer sub-agent
-- [x] Quality Assurance sub-agent
-- [x] Hypothesis Generator sub-agent
+- [x] 6 Intelligent Sub-agents (data-explorer, visualization-specialist, code-generator, report-writer, quality-assurance, hypothesis-generator)
 - [x] **12 Specialized Analysis Skills**
   - [x] data-exploration-visualization
   - [x] rfm-customer-segmentation
@@ -402,14 +363,15 @@ The project uses Claude Code's configuration system. Key settings:
   - [x] recommender-system
   - [x] user-profiling-analysis
 - [x] Core slash commands (/analyze, /visualize, /generate, /report, /quality, /hypothesis)
-- [x] **⭐ NEW: /do-more command** - Automatic multi-skill analysis
+- [x] **⭐ /do-more command** - Automatic multi-skill analysis
+- [x] **⭐ /do-all command** - Complete interactive workflow
 - [x] Automation hooks (context-loader, validate-analysis)
-- [x] Olist e-commerce sample datasets
 - [x] Interactive HTML report generation
 - [x] Comprehensive documentation
 
 ### Recent Enhancements
 - ⭐ **/do-more Command**: One-command automatic multi-skill analysis
+- ⭐ **/do-all Command**: Interactive workflow with human checkpoints
 - ⭐ **Interactive HTML Reports**: Beautiful, embedded charts with navigation
 - ⭐ **Smart Skill Matching**: Automatic skill selection based on data characteristics
 - ⭐ **Integrated Workflows**: Sequential execution of multiple skills
@@ -444,8 +406,8 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## 📞 Support
 
 For support and questions:
-- Check the documentation in the `docs/` directory
-- Review the examples in `examples/`
+- Review the comprehensive documentation in CLAUDE.md
+- Check the skill-specific documentation in `.claude/skills/`
 - Use the `/help` command for usage assistance
 
 ---
